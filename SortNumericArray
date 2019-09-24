@@ -1,3 +1,6 @@
+// This function developed for JavaScript is used to sort the elements of an numeric array.
+// The only parameter needed when calling it is the array.
+
 function sortNumericArray(arr){
 let sortedArr = [];
 while (arr.length > 0){
