@@ -1,0 +1,16 @@
+function sortNumericArray(arr){
+let sortedArr = [];
+while (arr.length > 0){
+let element = arr[0];
+let index = 0;
+for (let i = 1; i<arr.length; i++){
+    if (element > arr[i]){
+      element = arr[i];
+      index = i;
+    } else {         
+    }    
+  } 
+  sortedArr.push(arr.splice(index,1));  
+}
+return sortedArr;
+}
