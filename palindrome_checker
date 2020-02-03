@@ -1,0 +1,18 @@
+function palindrome(str) {  
+  let front = str.toLowerCase().split("").filter(temp => temp.match(/[\d\w]/gi)).filter(temp => temp.match(/[^\_]/gi));
+
+  let back = [];
+  let j = front.length-1;
+  for (let i = 0; i < front.length; i++){      
+      back[j] = front[i];
+      j--;
+  }
+  front = front.join("");
+  back = back.join("");
+  //console.log(front);
+  //console.log(back);
+  if (front === back){
+    return true;
+  }
+  return false;
+}
