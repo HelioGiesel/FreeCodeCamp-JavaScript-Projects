@@ -1,0 +1,35 @@
+function telephoneCheck(str) {
+  // Good luck!
+  let notchar = str.split("").filter(arr => arr.match(/[\d\(]/g));
+  if (str[0] !== notchar[0]){
+    return false;
+  }
+
+  let qtd = str.split("").filter(arr => arr.match(/\d/g)); // filter just numbers
+
+  if (qtd.length === 10 || qtd.length === 11 && qtd[0] === '1'){
+  } else { return false}; // check is there is 9 or 10 numbers/
+ 
+  let nops = str.split("").filter(arr => arr.match(/[^\d\(\)\-\s]/g));  
+  if (nops.length > 0){
+    return false;
+  } // check if there is another character besides numbers, '(', ')' and '-'
+
+  let closure = str.split("").filter(arr => arr.match(/[\)\(]/g));
+  if (closure.length > 0){    
+    if (closure.length !== 2){
+      return false;
+    } else {      
+      if (closure[0] !== "(" && closure[1] !== ")"){
+        return false;
+      } else {          
+          let index1 = str.indexOf('(');          
+          let index2 = str.indexOf(')');          
+          if (index2 - index1 !== 4){            
+            return false;
+          }
+      }
+    }    
+  } // check if there is () in the str, if yes, it should be only 2, and must be opening and closing, and should be 3 index away from each other. Otherwise should return false.
+  return true;
+}
