@@ -1,0 +1,15 @@
+function rot13(str) {
+  let array = str.split('');
+  let newStr = [];
+  for (let i = 0; i < array.length; i++){
+    if (array[i].match(/\w/)){
+      let temp = array[i].charCodeAt(0);
+      if ((temp + 13) > 90){
+        array[i] = String.fromCharCode(temp - 13);
+      } else {
+        array[i] = String.fromCharCode(temp + 13);
+      };      
+    } 
+  }
+  return array.join('');
+}
