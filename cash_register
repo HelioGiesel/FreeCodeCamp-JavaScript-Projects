@@ -1,0 +1,28 @@
+function checkCashRegister(price, cash, cid) {
+  var monValue = [["PENNY", 0.01], ["NICKEL", 0.05], ["DIME", 0.1], ["QUARTER", 0.25],["ONE", 1], ["FIVE", 5], ["TEN", 10], ["TWENTY", 20], ["ONE HUNDRED", 100]];
+  var change = cash-price;  // recebe a diferença do custo e pgto = troco
+  var arr = Array.prototype.slice.call(cid); // copia o array de entrada
+  var exchange = [["PENNY", 0.00], ["NICKEL", 0.00], ["DIME", 0.0], ["QUARTER", 0.0],["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]; 
+  /* for itera atraves do array checando equivalencia do valor do troco, caso encontre
+  é subtraido o valor correspondente da moeda/cedula do troco, do montante do arr, e adicionado no array de retorno caso ele já tenha o objeto, se não, adiciona o subarray.*/
+  for (let i = arr.length - 1; i >= 0; i--){ 
+    console.log("troco: " + change + " - fundo: " + arr[i][1] + " - index: " + i);
+    while (change >= monValue[i][1] && arr[i][1] > 0){    
+      change = (Math.round((change*100) - (monValue[i][1] * 100)))/100;      
+      arr[i][1] = (Math.round((arr[i][1]*100) - (monValue[i][1]*100)))/100;
+      exchange[i][1] = (Math.round((exchange[i][1]*100) + (monValue[i][1]*100)))/100;
+    }    
+  }  
+  
+  let fundo = arr.reduce((acc, cur) => (acc + cur[1]), 0);     
+  fundo = Math.round((fundo*100))/100;
+
+  if (change > 0){
+    return {status: "INSUFFICIENT_FUNDS", change: []};
+  } else if (change === 0 && fundo === 0){
+      return {status: "CLOSED", change: exchange};
+  }  else {
+      exchange = exchange.filter(x => x[1]>0).reverse();
+      return {status: "OPEN", change: exchange};
+  }    
+}
